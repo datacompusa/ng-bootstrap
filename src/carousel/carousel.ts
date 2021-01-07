@@ -280,8 +280,15 @@ export class NgbCarousel implements AfterContentChecked,
       });
     }
 
-    this.slides.changes.pipe(takeUntil(this._destroy$)).subscribe(() => this._cd.markForCheck());
-  }
+    this.slides.changes.pipe(takeUntil(this._destroy$)).subscribe(() => {
+      this._cd.detectChanges();
+      if (this.activeId != null) {
+        const element = this._getSlideElement(this.activeId);
+        if (element) {
+          element.classList.add('active');
+        }
+      }
+    });  }
 
   ngAfterContentChecked() {
     let activeSlide = this._getSlideById(this.activeId);
@@ -290,7 +297,7 @@ export class NgbCarousel implements AfterContentChecked,
 
   ngAfterViewInit() {
     // Initialize the 'active' class (not managed by the template)
-    if (this.activeId) {
+    if (this.activeId  != null) {
       const element = this._getSlideElement(this.activeId);
       if (element) {
         element.classList.add('active');
