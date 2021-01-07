@@ -1,6 +1,6 @@
 {
   "name": "@ng-bootstrap/ng-bootstrap",
-  "version": "8.0.1",
+  "version": "8.0.2",
   "description": "Angular powered Bootstrap",
   "author": "https://github.com/ng-bootstrap/ng-bootstrap/graphs/contributors",
   "engines": {
@@ -10,6 +10,7 @@
   "scripts": {
     "version": "yarn changelog && git add CHANGELOG.md",
     "postversion": "yarn ngb:build && yarn demo:build",
+    "preinstall": "node misc/preinstall.js",
     "build": "yarn ngb:build-ivy && yarn ngb:build && yarn demo:build",
     "test": "yarn check-format && yarn ngb:lint && yarn ngb:test && yarn schematics:test",
     "tdd": "yarn ngb:tdd",
